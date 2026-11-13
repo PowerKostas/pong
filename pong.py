@@ -1,14 +1,14 @@
 import pygame,sys,random
 from ctypes import windll
     
-#General Setup
+# General Setup
 windll.shcore.SetProcessDpiAwareness(1)
 pygame.mixer.pre_init(22050,-16,2,1)
 pygame.mixer.init(22050,-16,2,1)
 pygame.init()
 clock=pygame.time.Clock()
 
-#Window Setup
+# Window Setup
 width=1600
 height=900
 screen=pygame.display.set_mode((width,height))
@@ -20,7 +20,7 @@ paddle_2=pygame.Rect(width-40,height/2-90,30,180)
 bg_color=pygame.Color('grey12')
 light_grey=(200,200,200)
 
-#Menu Visuals
+# Menu Visuals
 pong_font=pygame.font.Font('freesansbold.ttf', 100)
 sinmul_font=pygame.font.Font('freesansbold.ttf',72)
 single_box=pygame.Rect(250,395,500,105)
@@ -32,10 +32,10 @@ impossible_box=pygame.Rect(850,600,500,105)
 play_again_box=pygame.Rect(250,420,500,105)
 main_menu_box=pygame.Rect(850,420,500,105)
 
-#Score
+# Score
 score_font=pygame.font.Font('freesansbold.ttf',64)
 
-#Sound
+# Sound
 score_sound=pygame.mixer.Sound('C:/Users/Kostas/Desktop/Coding/Codes/Pong/sounds/whistle.mp3')
 score_sound.set_volume(0.5)
 bong_sound=pygame.mixer.Sound('C:/Users/Kostas/Desktop/Coding/Codes/Pong/sounds/bong.mp3')
@@ -64,9 +64,9 @@ def quit(i):
 
 def up_down_both(i):
     global paddle_1_speed,paddle_2_speed
-    #This checks for the specific button
+    # This checks for the specific button
     if i.type==pygame.KEYDOWN:
-        #This checks for the specific button (This continues adding indefinetely*)
+        # This checks for the specific button (This continues adding indefinetely*)
         if i.key==pygame.K_w:
             paddle_1_speed-=6
         if i.key==pygame.K_s:
@@ -75,7 +75,7 @@ def up_down_both(i):
             paddle_2_speed-=6
         if i.key==pygame.K_DOWN:
             paddle_2_speed+=6
-    #This checks if any button has been released (*Till it's released here where it stops)
+    # This checks if any button has been released (*Till it's released here where it stops)
     if i.type==pygame.KEYUP:
         if i.key==pygame.K_w:
             paddle_1_speed+=6
@@ -136,12 +136,12 @@ def multi_menu(game_type,frames):
         clock.tick(120)
         screen.fill(bg_color)
         mouse_pos=pygame.mouse.get_pos()
-        back_text=sinmul_font.render('Back',False,light_grey)
+        back_text=sinmul_font.render('Back',True,light_grey)
         back_rect=screen.blit(back_text,(10,828.5))
         if back_rect.collidepoint(mouse_pos):
-            back_text=sinmul_font.render('Back',False,'darkgrey')
+            back_text=sinmul_font.render('Back',True,'darkgrey')
             back_rect=screen.blit(back_text,(10,828.5))
-        ball_speed_text=pong_font.render('Ball Speed',False,light_grey)
+        ball_speed_text=pong_font.render('Ball Speed',True,light_grey)
         screen.blit(ball_speed_text,(535,50))
         if easy_box.collidepoint(mouse_pos):
             pygame.draw.rect(screen,'dodgerblue4',easy_box)
@@ -159,13 +159,13 @@ def multi_menu(game_type,frames):
             pygame.draw.rect(screen,'red4',impossible_box)
         else:
             pygame.draw.rect(screen,light_grey,impossible_box)
-        easy_text=sinmul_font.render('Slow',False,'cadetblue')
+        easy_text=sinmul_font.render('Slow',True,'cadetblue')
         screen.blit(easy_text,(410,320))
-        medium_text=sinmul_font.render('Medium',False,'chartreuse4')
+        medium_text=sinmul_font.render('Medium',True,'chartreuse4')
         screen.blit(medium_text,(962,320))
-        hard_text=sinmul_font.render('Fast',False,'orange3')
+        hard_text=sinmul_font.render('Fast',True,'orange3')
         screen.blit(hard_text,(425,620))
-        impossible_text=sinmul_font.render('Impossible',False,'red3')
+        impossible_text=sinmul_font.render('Impossible',True,'red3')
         screen.blit(impossible_text,(908,620))
 
 def single_menu():
@@ -195,7 +195,7 @@ def single_menu():
         clock.tick(120)
         screen.fill(bg_color)
         mouse_pos=pygame.mouse.get_pos()
-        difficulties_text=pong_font.render('Difficulties',False,light_grey)
+        difficulties_text=pong_font.render('Difficulties',True,light_grey)
         screen.blit(difficulties_text,(525,50))
         if easy_box.collidepoint(mouse_pos):
             pygame.draw.rect(screen,'dodgerblue4',easy_box)
@@ -213,18 +213,18 @@ def single_menu():
             pygame.draw.rect(screen,'red4',impossible_box)
         else:
             pygame.draw.rect(screen,light_grey,impossible_box)
-        easy_text=sinmul_font.render('Easy',False,'cadetblue')
+        easy_text=sinmul_font.render('Easy',True,'cadetblue')
         screen.blit(easy_text,(414,320))
-        medium_text=sinmul_font.render('Medium',False,'chartreuse4')
+        medium_text=sinmul_font.render('Medium',True,'chartreuse4')
         screen.blit(medium_text,(962,320))
-        hard_text=sinmul_font.render('Hard',False,'orange3')
+        hard_text=sinmul_font.render('Hard',True,'orange3')
         screen.blit(hard_text,(413,620))
-        impossible_text=sinmul_font.render('Impossible',False,'red3')
+        impossible_text=sinmul_font.render('Impossible',True,'red3')
         screen.blit(impossible_text,(908,620))
-        back_text=sinmul_font.render('Back',False,light_grey)
+        back_text=sinmul_font.render('Back',True,light_grey)
         back_rect=screen.blit(back_text,(10,828.5))
         if back_rect.collidepoint(mouse_pos):
-            back_text=sinmul_font.render('Back',False,'darkgrey')
+            back_text=sinmul_font.render('Back',True,'darkgrey')
             back_rect=screen.blit(back_text,(10,828.5))
 
 def winning_screen(ball_speed_x,ball_speed_y,game_type,frames,winner):
@@ -243,7 +243,7 @@ def winning_screen(ball_speed_x,ball_speed_y,game_type,frames,winner):
         clock.tick(120)
         screen.fill(bg_color)
         mouse_pos=pygame.mouse.get_pos()
-        winning_text=pong_font.render(winner+' won!',False,light_grey)
+        winning_text=pong_font.render(winner+' won!',True,light_grey)
         if game_type==1 and (paddle_2_score==3 or paddle_2_score==5):
             screen.blit(winning_text,(424,50))
         else:
@@ -256,9 +256,9 @@ def winning_screen(ball_speed_x,ball_speed_y,game_type,frames,winner):
             pygame.draw.rect(screen,'darkgrey',main_menu_box)
         else:
             pygame.draw.rect(screen,light_grey,main_menu_box)
-        play_again_text=sinmul_font.render('Play Again',False,'grey12')
+        play_again_text=sinmul_font.render('Play Again',True,'grey12')
         screen.blit(play_again_text,(311,441))
-        play_again_text=sinmul_font.render('Main Menu',False,'grey12')
+        play_again_text=sinmul_font.render('Main Menu',True,'grey12')
         screen.blit(play_again_text,(905,441))
 
 def game(ball_speed_x,ball_speed_y,game_type,frames):
@@ -298,26 +298,26 @@ def game(ball_speed_x,ball_speed_y,game_type,frames):
             paddle_1.y+=paddle_1_speed
             paddle_2.y+=paddle_2_speed
         
-        #Visuals
+        # Visuals
         screen.fill(bg_color)
-        score_text_1=score_font.render(f"{paddle_1_score}",False,light_grey)
+        score_text_1=score_font.render(f"{paddle_1_score}",True,light_grey)
         screen.blit(score_text_1,(700,25))
-        score_text_2=score_font.render(f"{paddle_2_score}",False,light_grey)
+        score_text_2=score_font.render(f"{paddle_2_score}",True,light_grey)
         screen.blit(score_text_2,(864,25))
         pygame.draw.rect(screen,light_grey,paddle_1)
         pygame.draw.rect(screen,light_grey,paddle_2)
         pygame.draw.ellipse(screen,light_grey,ball)
         pygame.draw.aaline(screen,light_grey,(width/2,0),(width/2,height))
 
-        #To Refresh
+        # To Refresh
         pygame.display.flip()
         clock.tick(120)
 
-        #Animation Of Ball
+        # Animation Of Ball
         ball.x+=ball_speed_x
         ball.y+=ball_speed_y
 
-        #Collisions (remember y is reversed,δηλαδή η κορυφή είναι 0 και ο πάτος 900)
+        # Collisions (remember y is reversed,δηλαδή η κορυφή είναι 0 και ο πάτος 900)
         if ball.top<=0 or ball.bottom>=height:
             pygame.mixer.Sound.play(bong_sound)
             ball_speed_y*=-1
@@ -347,7 +347,7 @@ def game(ball_speed_x,ball_speed_y,game_type,frames):
                 winner='Computer'
             pygame.time.wait(2100)
             
-        #Don't worry about this
+        # Don't worry about this
         if ball.colliderect(paddle_1) and ball_speed_x<0:
             pygame.mixer.Sound.play(bong_sound)
             if abs(ball.left-paddle_1.right)<10:
@@ -396,17 +396,17 @@ def game(ball_speed_x,ball_speed_y,game_type,frames):
 
 def main_menu():
     while True:
-        #Refresh
+        # Refresh
         pygame.display.flip()
         clock.tick(120)
 
-        #Visuals
+        # Visuals
         screen.fill('grey12')
         mouse_pos=pygame.mouse.get_pos()
-        exit_text=sinmul_font.render('Exit',False,light_grey)
+        exit_text=sinmul_font.render('Exit',True,light_grey)
         exit_rect=screen.blit(exit_text,(1445,827.5))
         if exit_rect.collidepoint(mouse_pos):
-            exit_text=sinmul_font.render('Exit',False,'darkgrey')
+            exit_text=sinmul_font.render('Exit',True,'darkgrey')
             exit_rect=screen.blit(exit_text,(1445,827.5))
         if single_box.collidepoint(mouse_pos):
             pygame.draw.rect(screen,'darkgrey',single_box)
@@ -416,11 +416,11 @@ def main_menu():
             pygame.draw.rect(screen,'darkgrey',multi_box)
         else:
             pygame.draw.rect(screen,light_grey,multi_box)
-        pong_text=pong_font.render('Pong',False,light_grey)
+        pong_text=pong_font.render('Pong',True,light_grey)
         pong_rect=screen.blit(pong_text,(671,52))
-        single_text=sinmul_font.render('Singleplayer',False,'grey12')
+        single_text=sinmul_font.render('Singleplayer',True,'grey12')
         screen.blit(single_text,(272,414))
-        multi_text=sinmul_font.render('Multiplayer',False,'grey12')
+        multi_text=sinmul_font.render('Multiplayer',True,'grey12')
         screen.blit(multi_text,(900,415))
         
         for i in pygame.event.get():

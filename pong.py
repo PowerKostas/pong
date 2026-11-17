@@ -1,8 +1,16 @@
-import pygame,sys,random
-from ctypes import windll
+# HD fix
+import ctypes
+try:
+    ctypes.windll.shcore.SetProcessDpiAwareness(1)
+except Exception:
+    try:
+        ctypes.windll.user32.SetProcessDPIAware()
+    except Exception:
+        pass
+
+import os,pygame,sys,random
     
 # General Setup
-windll.shcore.SetProcessDpiAwareness(1)
 pygame.mixer.pre_init(22050,-16,2,1)
 pygame.mixer.init(22050,-16,2,1)
 pygame.init()
@@ -36,17 +44,18 @@ main_menu_box=pygame.Rect(850,420,500,105)
 score_font=pygame.font.Font('freesansbold.ttf',64)
 
 # Sound
-score_sound=pygame.mixer.Sound('C:/Users/Kostas/Desktop/Coding/Codes/Pong/sounds/whistle.mp3')
+sounds_dir=os.path.join(os.path.dirname(os.path.abspath(__file__)),'sounds')
+score_sound=pygame.mixer.Sound(os.path.join(sounds_dir,'whistle.mp3'))
 score_sound.set_volume(0.5)
-bong_sound=pygame.mixer.Sound('C:/Users/Kostas/Desktop/Coding/Codes/Pong/sounds/bong.mp3')
+bong_sound=pygame.mixer.Sound(os.path.join(sounds_dir,'bong.mp3'))
 bong_sound.set_volume(0.9)
-close_sound=pygame.mixer.Sound('C:/Users/Kostas/Desktop/Coding/Codes/Pong/sounds/close.mp3')
+close_sound=pygame.mixer.Sound(os.path.join(sounds_dir,'close.mp3'))
 close_sound.set_volume(0.5)
-open_sound=pygame.mixer.Sound('C:/Users/Kostas/Desktop/Coding/Codes/Pong/sounds/open.mp3')
-celebration_sound=pygame.mixer.Sound('C:/Users/Kostas/Desktop/Coding/Codes/Pong/sounds/celebration.mp3')
-losing_sound=pygame.mixer.Sound('C:/Users/Kostas/Desktop/Coding/Codes/Pong/sounds/losing.mp3')
+open_sound=pygame.mixer.Sound(os.path.join(sounds_dir,'open.mp3'))
+celebration_sound=pygame.mixer.Sound(os.path.join(sounds_dir,'celebration.mp3'))
+losing_sound=pygame.mixer.Sound(os.path.join(sounds_dir,'losing.mp3'))
 losing_sound.set_volume(4.0)
-pygame.mixer.music.load('C:/Users/Kostas/Desktop/Coding/Codes/Pong/sounds/main.mp3')
+pygame.mixer.music.load(os.path.join(sounds_dir,'main.mp3'))
 pygame.mixer.music.set_volume(0.3)
 pygame.mixer.music.play(-1)
 
